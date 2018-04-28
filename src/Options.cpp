@@ -195,14 +195,16 @@ static struct option const api_options[] = {
 static const char *algoNames[] = {
     "cryptonight",
     "cryptonight-lite",
-    "cryptonight-heavy"
+    "cryptonight-heavy",
+	"cryptonight-ipbc"
 };
 
 
 static const char *algoNamesShort[] = {
     "cn",
     "cn-lite",
-    "cn-heavy"
+    "cn-heavy",
+	"cn-ipbc"
 };
 
 
@@ -577,7 +579,7 @@ bool Options::parseArg(int key, uint64_t arg)
 
     case 1003: /* --donate-level */
         if (arg >= kMinimumDonateLevel && arg <= 99) {
-            m_donateLevel = static_cast<int>(arg);
+            m_donateLevel = static_cast<double>(arg);
         }
         break;
 

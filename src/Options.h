@@ -66,7 +66,7 @@ public:
     inline const std::vector<GpuThread*> &threads() const { return m_threads; }
     inline const std::vector<Url*> &pools() const         { return m_pools; }
     inline int apiPort() const                            { return m_apiPort; }
-    inline int donateLevel() const                        { return m_donateLevel; }
+    inline double donateLevel() const                         { return m_donateLevel; }
     inline int maxGpuThreads() const                      { return m_maxGpuThreads; }
     inline int printTime() const                          { return m_printTime; }
     inline int retries() const                            { return m_retries; }
@@ -113,7 +113,7 @@ private:
     char *m_userAgent;
     CudaCLI m_cudaCLI;
     int m_apiPort;
-    int m_donateLevel;
+    double m_donateLevel;
     int m_maxGpuThreads;
     int m_maxGpuUsage;
     int m_printTime;
