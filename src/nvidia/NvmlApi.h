@@ -4,8 +4,7 @@
  * Copyright 2014      Lucas Jones <https://github.com/lucasjones>
  * Copyright 2014-2016 Wolf9466    <https://github.com/OhGodAPet>
  * Copyright 2016      Jay D Dee   <jayddee246@gmail.com>
- * Copyright 2016-2017 XMRig       <support@xmrig.com>
- *
+ * Copyright 2016-2018 XMRig       <https://github.com/xmrig>, <support@xmrig.com>
  *
  *   This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -21,8 +20,8 @@
  *   along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef __NVML_H__
-#define __NVML_H__
+#ifndef XMRIG_NVML_H
+#define XMRIG_NVML_H
 
 
 #include <vector>
@@ -31,7 +30,9 @@
 #include "nvidia/Health.h"
 
 
-class GpuThread;
+namespace xmrig {
+    class IThread;
+}
 
 
 class NvmlApi
@@ -42,7 +43,7 @@ public:
 
     static bool health(int id, Health &health);
     static const char *version();
-    static void bind(const std::vector<GpuThread*> &threads);
+    static void bind(const std::vector<xmrig::IThread*> &threads);
 
     static inline bool isAvailable() { return m_available; }
 
@@ -51,4 +52,4 @@ private:
 };
 
 
-#endif /* __NVML_H__ */
+#endif /* XMRIG_NVML_H */

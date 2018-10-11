@@ -4,8 +4,7 @@
  * Copyright 2014      Lucas Jones <https://github.com/lucasjones>
  * Copyright 2014-2016 Wolf9466    <https://github.com/OhGodAPet>
  * Copyright 2016      Jay D Dee   <jayddee246@gmail.com>
- * Copyright 2016-2017 XMRig       <support@xmrig.com>
- *
+ * Copyright 2016-2018 XMRig       <https://github.com/xmrig>, <support@xmrig.com>
  *
  *   This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -27,7 +26,7 @@
 
 
 #include "nvidia/NvmlApi.h"
-#include "workers/GpuThread.h"
+#include "workers/CudaThread.h"
 
 
 static uv_lib_t nvmlLib;
@@ -136,18 +135,18 @@ const char *NvmlApi::version()
 }
 
 
-void NvmlApi::bind(const std::vector<GpuThread*> &threads)
+void NvmlApi::bind(const std::vector<xmrig::IThread*> &threads)
 {
     if (!isAvailable() || !pNvmlDeviceGetCount || !pNvmlDeviceGetHandleByIndex || !pNvmlDeviceGetPciInfo) {
         return;
     }
 
-    unsigned int count = 0;
+    uint32_t count = 0;
     if (pNvmlDeviceGetCount(&count) != NVML_SUCCESS) {
         return;
     }
 
-    for (unsigned int i = 0; i < count; i++) {
+    for (uint32_t i = 0; i < count; i++) {
         nvmlDevice_t device;
         if (pNvmlDeviceGetHandleByIndex(i, &device) != NVML_SUCCESS) {
             continue;
@@ -158,7 +157,8 @@ void NvmlApi::bind(const std::vector<GpuThread*> &threads)
             continue;
         }
 
-        for (GpuThread *thread : threads) {
+        for (xmrig::IThread *t : threads) {
+            auto thread = static_cast<CudaThread *>(t);
             if (thread->pciBusID() == pci.bus && thread->pciDeviceID() == pci.device && thread->pciDomainID() == pci.domain) {
                 thread->setNvmlId(i);
                 break;
