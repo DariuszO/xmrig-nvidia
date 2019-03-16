@@ -29,7 +29,6 @@
 
 #include "common/cpu/Cpu.h"
 #include "common/log/Log.h"
-#include "common/net/Pool.h"
 #include "core/Config.h"
 #include "core/Controller.h"
 #include "Summary.h"
@@ -93,17 +92,16 @@ static void print_commands(xmrig::Config *config)
 {
     if (config->isColors()) {
         Log::i()->text(GREEN_BOLD(" * ") WHITE_BOLD("COMMANDS     ") MAGENTA_BOLD("h") WHITE_BOLD("ashrate, ")
-                                                                     WHITE_BOLD("h") MAGENTA_BOLD("e") WHITE_BOLD("alth, ")
                                                                      MAGENTA_BOLD("p") WHITE_BOLD("ause, ")
                                                                      MAGENTA_BOLD("r") WHITE_BOLD("esume"));
   Log::i()->text("-----------------------------Compiled by Indeed Miners-----------------------------");
   Log::i()->text("88 88b 88 8888b.  888888 888888 8888b.      8b    d8 88 88b 88 888888 88''Yb .dP'Y8");
   Log::i()->text("88 88Yb88  8I  Yb 88__   88__    8I  Yb     88b  d88 88 88Yb88 88__   88__dP `Ybo.'");
   Log::i()->text("88 88 Y88  8I  dY 88''   88''    8I  dY     88YbdP88 88 88 Y88 88''   88'Yb  o.`Y8b");
-  Log::i()->text("88 88  Y8 8888Y'  888888 888888 8888Y'      88 YY 88 88 88  Y8 888888 88  Yb 8bodP'");        
+  Log::i()->text("88 88  Y8 8888Y'  888888 888888 8888Y'      88 YY 88 88 88  Y8 888888 88  Yb 8bodP'");                                                                    
     }
     else {
-        Log::i()->text(" * COMMANDS     'h' hashrate, 'e' health, 'p' pause, 'r' resume");
+        Log::i()->text(" * COMMANDS     'h' hashrate, 'p' pause, 'r' resume");
   Log::i()->text("-----------------------------Compiled by Indeed Miners-----------------------------");
   Log::i()->text("88 88b 88 8888b.  888888 888888 8888b.      8b    d8 88 88b 88 888888 88''Yb .dP'Y8");
   Log::i()->text("88 88Yb88  8I  Yb 88__   88__    8I  Yb     88b  d88 88 88Yb88 88__   88__dP `Ybo.'");
